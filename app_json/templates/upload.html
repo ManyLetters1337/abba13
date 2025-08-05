@@ -1,0 +1,21 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% trans 'Upload Form' %}</title>
+</head>
+<body>
+    {% for message in messages %}
+      <p style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+        {{ message }}
+      </p>
+    {% endfor %}
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">{% trans 'Download' %}</button>
+    </form>
+    <p><a href="{% url 'show_data' %}">{% trans 'Show downloaded data' %}</a></p>
+</body>
+</html>
